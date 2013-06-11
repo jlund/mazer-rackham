@@ -54,8 +54,6 @@
 - name: Set up log rotation for Nginx and Passenger
   copy: src={{ item }}-logrotate
         dest=/etc/logrotate.d/{{ item }}
-        owner=root
-        group=root
   with_items:
     - nginx
     - passenger

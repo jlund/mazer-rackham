@@ -2,8 +2,6 @@
 - name: Generate the imgur-display virtual host and restart Nginx if it is updated
   template: src=vhost.j2
             dest=/etc/nginx/sites-available/imgur-display
-            owner=root
-            group=root
             mode=755
   notify: Restart Nginx
 
