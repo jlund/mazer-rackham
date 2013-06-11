@@ -20,4 +20,6 @@ mazer-rackham
 
 Running this playbook will leave you with a fully-functional Rack application server that is ready to show you a random picture from imgur. With some incredibly minor adjustments, this playbook will deploy your own application! It's my hope that this will be helpful to anyone who needs to set up a similar server using Ansible.
 
+This playbook was tested on Ubuntu 12.04.2 LTS but should also work on Debian 7.
+
 Enjoy!

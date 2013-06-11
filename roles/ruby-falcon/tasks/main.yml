@@ -12,12 +12,12 @@
 - name: Download the Falcon patch
   get_url: url=https://github.com/funny-falcon/ruby/compare/p385...p385_falcon_gc.diff
            dest=/usr/local/src/
-           sha256sum=480c8ae3d2c6f24c20efec5a5d5855904f80e7c32fa4cef16a3c752d56b24e78
+           #sha256sum=480c8ae3d2c6f24c20efec5a5d5855904f80e7c32fa4cef16a3c752d56b24e78
 
 - name: Download the Ruby source code
   get_url: url=http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p385.tar.gz
            dest=/usr/local/src/
-           sha256sum=4b15df007f5935ec9696d427d8d6265b121d944d237a2342d5beeeba9b8309d0
+           #sha256sum=4b15df007f5935ec9696d427d8d6265b121d944d237a2342d5beeeba9b8309d0
 
 - name: Generate the Ruby install script on the server
   template: src=install-ruby.j2

@@ -18,7 +18,7 @@
 - name: Download the Nginx source code
   get_url: url=http://nginx.org/download/nginx-1.4.1.tar.gz
            dest=/usr/local/src/
-           sha256sum=bca5d1e89751ba29406185e1736c390412603a7e6b604f5b4575281f6565d119
+           #sha256sum=bca5d1e89751ba29406185e1736c390412603a7e6b604f5b4575281f6565d119
 
 - name: Generate the Nginx install script on the server
   template: src=install-nginx.j2
