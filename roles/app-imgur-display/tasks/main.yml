@@ -1,0 +1,34 @@
+---
+- name: Generate the imgur-display virtual host and restart Nginx if it is updated
+  template: src=vhost.j2
+            dest=/etc/nginx/sites-available/imgur-display
+            owner=root
+            group=root
+            mode=755
+  notify: Restart Nginx
+
+- name: Enable the imgur-display virtual host
+  file: path=/etc/nginx/sites-enabled/imgur-display
+        src=/etc/nginx/sites-available/imgur-display
+        state=link
+
+- name: Create the application directories
+  file: path={{ item }}
+        owner=deploy
+        group=deploy
+        state=directory
+  with_items:
+    - "{{ imgur_display_location }}"
+    - "{{ imgur_display_location}}/shared"
+    - "{{ imgur_display_location}}/shared/bundle"
+    - "{{ imgur_display_location}}/shared/log"
+
+- name: Check out the latest revision of the codebase and notify the proper handlers if there have been updates
+  git: repo=https://github.com/jlund/imgur-display.git
+       dest={{ imgur_display_location}}/current
+  sudo: yes
+  sudo_user: deploy
+  notify:
+    - Symlink the log directory to the shared location
+    - Install the bundle
+    - Restart the imgur-display application

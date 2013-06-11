@@ -1,0 +1,9 @@
+---
+- name: Upgrade apt packages
+  apt: upgrade=yes update_cache=yes
+
+- name: Install git
+  apt: pkg=git state=present
+
+- name: Install NTP
+  apt: pkg=ntp state=present

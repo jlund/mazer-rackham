@@ -1,0 +1,17 @@
+---
+- name: Restart Nginx
+  action: service name=nginx state=restarted
+
+- name: Symlink the log directory to the shared location
+  file: path={{ imgur_display_location }}/current/log
+        src={{ imgur_display_location }}/shared/log
+        state=link
+
+- name: Install the bundle
+  command: bundle install --deployment --path {{ imgur_display_location }}/shared/bundle
+           chdir={{ imgur_display_location }}/current
+  sudo: yes
+  sudo_user: deploy
+
+- name: Restart the imgur-display application
+  command:  touch {{ imgur_display_location }}/current/tmp/restart.txt

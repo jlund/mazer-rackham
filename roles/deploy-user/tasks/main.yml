@@ -1,0 +1,18 @@
+---
+- name: Add the deploy user
+  user: name=deploy
+        home=/home/deploy
+        shell=/bin/bash
+        comment="Deploy User"
+
+- name: Enable sudo access for the deploy user
+  user: name=deploy
+        groups=sudo
+        append=yes
+
+- name: Set up authorized_keys for the deploy user
+  authorized_key: user=deploy
+                  state=present
+                  key="{{ item }}"
+  with_items:
+    - ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBC3jdO0ojv6W28wA95qJQexaFNMtVte1xEASeNTAPgyjTqzojZ3cINVXbZS55UD83upMJd5jugohfKp+k/Dus+Y= jlund@Mal

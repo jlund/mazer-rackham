@@ -1,0 +1,11 @@
+/opt/nginx/logs/*.log {
+  daily
+  missingok
+  compress
+  rotate 7
+  dateext
+  notifempty
+  sharedscripts
+  extension gz
+  copytruncate
+}

@@ -1,0 +1,11 @@
+/var/www/*/shared/log/*.log {
+  daily
+  missingok
+  compress
+  rotate 365
+  dateext
+  notifempty
+  sharedscripts
+  extension gz
+  copytruncate
+}

@@ -1,0 +1,61 @@
+---
+- name: Install the libcurl OpenSSL development files that Passenger requires
+  apt: pkg=libcurl4-openssl-dev
+       state=present
+
+- name: Install Passenger
+  command: "{{ ruby_location }}/bin/gem install passenger -v {{ passenger_version }}
+            creates={{ ruby_location }}/bin/passenger-install-nginx-module"
+
+- name: Make Passenger symlinks
+  file: path=/usr/local/bin/{{ item }}
+        src={{ ruby_location }}/bin/{{ item }}
+        state=link
+  with_items:
+    - passenger-memory-stats
+    - passenger-status
+
+- name: Download the Nginx source code
+  get_url: url=http://nginx.org/download/nginx-1.4.1.tar.gz
+           dest=/usr/local/src/
+           sha256sum=bca5d1e89751ba29406185e1736c390412603a7e6b604f5b4575281f6565d119
+
+- name: Generate the Nginx install script on the server
+  template: src=install-nginx.j2
+            dest=/usr/local/src/install-nginx.sh
+            mode=700
+
+- name: Run the Nginx install script
+  command: /usr/local/src/install-nginx.sh
+           creates=/opt/nginx/sbin/nginx
+
+- name: Generate the Nginx configuration file and restart the service if it has been updated
+  template: src=nginx-conf.j2
+            dest=/opt/nginx/conf/nginx.conf
+  notify: Restart Nginx
+
+- name: Copy Nginx init script and restart the service if it has been updated
+  copy: src=nginx-init
+        dest=/etc/init.d/nginx
+        mode=755
+  notify: Restart Nginx
+
+- name: Enable the Nginx init script so the service will start at boot
+  command: update-rc.d nginx defaults
+           creates=/etc/rc0.d/K20nginx
+
+- name: Set up Nginx vhost directories
+  file: path=/etc/nginx/{{ item }}
+        state=directory
+  with_items:
+    - sites-available
+    - sites-enabled
+
+- name: Set up log rotation for Nginx and Passenger
+  copy: src={{ item }}-logrotate
+        dest=/etc/logrotate.d/{{ item }}
+        owner=root
+        group=root
+  with_items:
+    - nginx
+    - passenger

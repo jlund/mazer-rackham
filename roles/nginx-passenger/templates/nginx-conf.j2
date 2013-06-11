@@ -1,0 +1,29 @@
+user  www-data;
+worker_processes  4;  
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    passenger_root {{ ruby_location }}/lib/ruby/gems/1.9.1/gems/passenger-{{ passenger_version }};
+    passenger_ruby /usr/local/bin/ruby-falcon-wrapper;
+    passenger_max_pool_size {{ passenger_max_pool_size }};
+    passenger_max_requests {{ passenger_max_requests }};
+
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile       on;
+    tcp_nopush     on;
+    client_max_body_size  10M;
+
+    keepalive_timeout  10;
+
+    gzip  on;
+    gzip_types  text/css text/xml text/plain application/x-javascript application/atom+xml application/rss+xml;
+
+
+    include /etc/nginx/sites-enabled/*;
+}
