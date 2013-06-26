@@ -23,3 +23,17 @@ Running this playbook will leave you with a fully-functional Rack application se
 This playbook was tested on Ubuntu 12.04.2 LTS but should also work on Debian 7.
 
 Enjoy!
+
+Testing this playbook with Vagrant
+----------------------------------
+
+* Download and install [Vagrant](http://vagrantup.com/)
+* Copy or rename `Vagrantfile.example` to `Vagrantfile`
+* Copy or rename `ansible_hosts.example` to `ansible_hosts`
+* Comment out the `user: root` line from `imgur-display-server.yml` and uncomment
+  the two lines below `Vagrant setup`
+* Run `vagrant up` in a terminal from within this folder
+* When the Ansible provisioning completes, visit [http://localhost:8080/](localhost:8080)
+  in your host machine's browser to view the running Rack app
+* Run `vagrant halt` to shutdown the VM
+* Run `vagrant destroy` to delete the VM's data
