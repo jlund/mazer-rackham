@@ -3,7 +3,7 @@
   template: src=vhost.j2
             dest=/etc/nginx/sites-available/imgur-display
             mode=755
-  notify: Restart Nginx
+  notify: Restart Nginx with updated vhost configuration
 
 - name: Enable the imgur-display virtual host
   file: path=/etc/nginx/sites-enabled/imgur-display

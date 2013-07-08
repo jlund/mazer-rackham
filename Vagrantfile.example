@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
   # For information on available options for Ansible provisioning, please visit:
   # http://docs.vagrantup.com/v2/provisioning/ansible.html
   config.vm.provision :ansible do |ansible|
-    ansible.playbook = "imgur-display-server.yml"
+    ansible.playbook = "imgur-display-setup.yml"
     ansible.inventory_file = "ansible_hosts"
   end
 

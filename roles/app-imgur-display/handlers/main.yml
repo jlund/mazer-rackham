@@ -1,5 +1,5 @@
 ---
-- name: Restart Nginx
+- name: Restart Nginx with updated vhost configuration
   action: service name=nginx state=restarted
 
 - name: Symlink the log directory to the shared location

@@ -1,0 +1,16 @@
+---
+- hosts: imgur-display-servers
+
+  user: root
+
+  # Vagrant setup
+  # user: vagrant
+  # sudo: true
+
+  roles:
+    - common
+    - deploy-user
+    - ssh
+    - ruby-falcon
+    - nginx-passenger
+    - app-imgur-display

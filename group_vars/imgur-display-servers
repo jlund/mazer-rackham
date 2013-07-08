@@ -1,0 +1,3 @@
+---
+passenger_max_pool_size: "4"
+passenger_max_requests:  "2000"

@@ -30,7 +30,7 @@ Testing this playbook with Vagrant
 * Download and install [Vagrant](http://vagrantup.com/)
 * Copy or rename `Vagrantfile.example` to `Vagrantfile`
 * Copy or rename `ansible_hosts.example` to `ansible_hosts`
-* Comment out the `user: root` line from `imgur-display-server.yml` and uncomment
+* Comment out the `user: root` line from `imgur-display-setup.yml` and uncomment
   the two lines below `Vagrant setup`
 * Run `vagrant up` in a terminal from within this folder
 * When the Ansible provisioning completes, visit [http://localhost:8080/](localhost:8080)
