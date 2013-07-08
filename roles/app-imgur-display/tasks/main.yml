@@ -17,13 +17,13 @@
         state=directory
   with_items:
     - "{{ imgur_display_location }}"
-    - "{{ imgur_display_location}}/shared"
-    - "{{ imgur_display_location}}/shared/bundle"
-    - "{{ imgur_display_location}}/shared/log"
+    - "{{ imgur_display_location }}/shared"
+    - "{{ imgur_display_location }}/shared/bundle"
+    - "{{ imgur_display_location }}/shared/log"
 
 - name: Check out the latest revision of the codebase and notify the proper handlers if there have been updates
   git: repo=https://github.com/jlund/imgur-display.git
-       dest={{ imgur_display_location}}/current
+       dest={{ imgur_display_location }}/current
   sudo: yes
   sudo_user: deploy
   notify:
