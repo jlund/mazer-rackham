@@ -1,9 +1,22 @@
 ---
 - name: Upgrade apt packages
-  apt: upgrade=yes update_cache=yes
+  apt: upgrade=yes
+       update_cache=yes
 
 - name: Install git
-  apt: pkg=git state=present
+  apt: pkg=git
 
 - name: Install NTP
-  apt: pkg=ntp state=present
+  apt: pkg=ntp
+
+- name: Install Vim
+  apt: pkg=vim
+
+- name: Install prerequisite packages that are necessary to compile applications
+  apt: pkg={{ item }}
+  with_items:
+    - autoconf
+    - build-essential
+
+- name: Install python-software-properties so the apt_repository module will work properly
+  apt: pkg=python-software-properties

@@ -1,0 +1,3 @@
+#!/bin/bash
+export RAILS_ENV=production
+exec "{{ ruby_location }}/bin/rake" "$@"
