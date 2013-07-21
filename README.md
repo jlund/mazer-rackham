@@ -27,6 +27,7 @@ Enjoy!
 Testing this playbook with Vagrant
 ----------------------------------
 
+* Install Ansible (this playbook requires version >1.2, which for now means you need the development version) 
 * Download and install [Vagrant](http://vagrantup.com/)
 * Copy or rename `Vagrantfile.example` to `Vagrantfile`
 * Copy or rename `ansible_hosts.example` to `ansible_hosts`
