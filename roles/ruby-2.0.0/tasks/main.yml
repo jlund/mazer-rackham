@@ -15,24 +15,26 @@
 - name: Generate the Ruby installation script on the server
   template: src=install-ruby.j2
             dest=/usr/local/src/install-ruby.sh
+            owner=root
+            group=root
             mode=700
 
 - name: Run the Ruby installation script
   command: /usr/local/src/install-ruby.sh
            creates={{ ruby_location }}/bin/ruby
 
-- name: Generate the wrapper script that contains GC settings
-  template: src=ruby-gc-wrapper.j2
-            dest=/usr/local/bin/ruby-gc-wrapper
+- name: Generate the script that allows us to easily run Rake tasks with RAILS_ENV set to production, and the wrapper script that contains GC settings
+  template: src={{ item }}.j2
+            dest=/usr/local/bin/{{ item }}
+            owner=root
+            group=root
             mode=755
-
-- name: Generate the script that allows us to easily run Rake tasks with RAILS_ENV set to production
-  template: src=rake-production.j2
-            dest=/usr/local/bin/rake-production
-            mode=755
+  with_items:
+    - rake-production
+    - ruby-gc-wrapper
 
 - name: Install Bundler
-  command: "{{ ruby_location }}/bin/gem install bundler 
+  command: "{{ ruby_location }}/bin/gem install bundler
             creates={{ ruby_location }}/bin/bundle"
 
 - name: Make Ruby symlinks

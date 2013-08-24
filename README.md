@@ -1,15 +1,16 @@
 mazer-rackham
 =============
 
- Sample [Ansible](http://www.ansibleworks.com/) Playbook for Rack applications that installs Nginx, Passenger, Ruby 1.9.3 + the [Falcon patch](https://gist.github.com/funny-falcon/4755042). It also demonstrates how to deploy a [sample Rack application](https://github.com/jlund/imgur-display) using git.
+ Sample [Ansible](http://www.ansibleworks.com/) Playbook for Rack applications that installs Nginx, Passenger, and Ruby 2.0.0. It also demonstrates how to deploy a [basic Rack application](https://github.com/jlund/imgur-display) from a git repository.
 
  Specifically, it does the following:
 
- * Installs a few crucial packages like git and NTP
+ * Upgrades packages
+ * Installs a few crucial programs like git, NTP, and Vim
  * Creates a deploy user that the application files will belong to
  * Adds an SSH public key to the deploy user's Authorized Keys file
  * Reconfigures OpenSSH to only allow access via SSH keys
- * Installs Ruby 1.9.3 + the Falcon patch
+ * Installs Ruby 2.0.0
  * Installs Bundler
  * Installs Nginx + Passenger
  * Sets up and enables an Nginx vhost
@@ -20,7 +21,7 @@ mazer-rackham
 
 Running this playbook will leave you with a fully-functional Rack application server that is ready to show you a random picture from imgur. With some incredibly minor adjustments, this playbook will deploy your own application! It's my hope that this will be helpful to anyone who needs to set up a similar server using Ansible.
 
-This playbook was tested on Ubuntu 12.04.2 LTS but should also work on Debian 7.
+This playbook will run on Ubuntu 12.04 LTS and higher, and also works on Debian 7.
 
 Enjoy!
 

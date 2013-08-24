@@ -11,7 +11,7 @@
 ### END INIT INFO
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=/opt/nginx/sbin/nginx
+DAEMON={{ nginx_location }}/sbin/nginx
 NAME=nginx
 DESC=nginx
 
@@ -27,28 +27,28 @@ set -e
 case "$1" in
   start)
   echo -n "Starting $DESC: "
-  start-stop-daemon --start --quiet --pidfile /opt/nginx/logs/nginx.pid \
+  start-stop-daemon --start --quiet --pidfile {{ nginx_location }}/logs/nginx.pid \
     --exec $DAEMON -- $DAEMON_OPTS || true
   echo "Done."
   ;;
   stop)
   echo -n "Stopping $DESC: "
-  start-stop-daemon --stop --quiet --pidfile /opt/nginx/logs/nginx.pid \
+  start-stop-daemon --stop --quiet --pidfile {{ nginx_location }}/logs/nginx.pid \
     --exec $DAEMON || true
   echo "Done."
   ;;
   restart|force-reload)
   echo -n "Restarting $DESC: "
   start-stop-daemon --stop --quiet --pidfile \
-    /opt/nginx/logs/nginx.pid --exec $DAEMON || true
+    {{ nginx_location }}/logs/nginx.pid --exec $DAEMON || true
   sleep 1
   start-stop-daemon --start --quiet --pidfile \
-    /opt/nginx/logs/nginx.pid --exec $DAEMON -- $DAEMON_OPTS || true
+    {{ nginx_location }}/logs/nginx.pid --exec $DAEMON -- $DAEMON_OPTS || true
   echo "Done."
   ;;
   reload)
       echo -n "Reloading $DESC configuration: "
-      start-stop-daemon --stop --signal HUP --quiet --pidfile /opt/nginx/logs/nginx.pid \
+      start-stop-daemon --stop --signal HUP --quiet --pidfile {{ nginx_location }}/logs/nginx.pid \
           --exec $DAEMON || true
       echo "Done."
       ;;

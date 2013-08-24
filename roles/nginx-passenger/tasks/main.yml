@@ -1,11 +1,11 @@
 ---
-- name: Install the libcurl OpenSSL development files that Passenger requires
-  apt: pkg=libcurl4-openssl-dev
+- name: Install the libcurl GnuTLS development files that Passenger requires
+  apt: pkg=libcurl4-gnutls-dev
        state=present
 
 - name: Install Passenger
   command: "{{ ruby_location }}/bin/gem install passenger -v {{ passenger_version }}
-            creates={{ ruby_location }}/bin/passenger-install-nginx-module"
+            creates={{ ruby_location }}/lib/ruby/gems/{{ ruby_library_version }}/gems/passenger-{{ passenger_version }}/README.md"
 
 - name: Make Passenger symlinks
   file: path=/usr/local/bin/{{ item }}
@@ -16,28 +16,34 @@
     - passenger-status
 
 - name: Download the Nginx source code
-  get_url: url=http://nginx.org/download/nginx-1.4.1.tar.gz
+  get_url: url=http://nginx.org/download/nginx-{{ nginx_version }}.tar.gz
            dest=/usr/local/src/
-           sha256sum=bca5d1e89751ba29406185e1736c390412603a7e6b604f5b4575281f6565d119
+           sha256sum={{ nginx_checksum }}
 
-- name: Generate the Nginx install script on the server
+- name: Generate the Nginx installation script on the server
   template: src=install-nginx.j2
             dest=/usr/local/src/install-nginx.sh
+            owner=root
+            group=root
             mode=700
 
-- name: Run the Nginx install script
+- name: Run the Nginx installation script
   command: /usr/local/src/install-nginx.sh
-           creates=/opt/nginx/sbin/nginx
+           creates={{ nginx_location }}/sbin/nginx
 
 - name: Generate the Nginx configuration file and restart the service if it has been updated
   template: src=nginx-conf.j2
-            dest=/opt/nginx/conf/nginx.conf
+            dest={{ nginx_location }}/conf/nginx.conf
+            owner=root
+            group=root
   notify: Restart Nginx
 
-- name: Copy Nginx init script and restart the service if it has been updated
-  copy: src=nginx-init
-        dest=/etc/init.d/nginx
-        mode=755
+- name: Generate Nginx init script and restart the service if it has been updated
+  template: src=nginx-init.j2
+            dest=/etc/init.d/nginx
+            owner=root
+            group=root
+            mode=755
   notify: Restart Nginx
 
 - name: Enable the Nginx init script so the service will start at boot
@@ -51,9 +57,9 @@
     - sites-available
     - sites-enabled
 
-- name: Set up log rotation for Nginx and Passenger
-  copy: src={{ item }}-logrotate
-        dest=/etc/logrotate.d/{{ item }}
-  with_items:
-    - nginx
-    - passenger
+- name: Set up log rotation for Nginx
+  template: src=nginx-logrotate.j2
+            dest=/etc/logrotate.d/nginx
+            owner=root
+            group=root
+            mode=644

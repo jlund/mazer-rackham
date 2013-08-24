@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cd /usr/local/src/
-tar xvfz nginx-1.4.1.tar.gz
-{{ ruby_location }}/bin/passenger-install-nginx-module --auto --prefix=/opt/nginx --nginx-source-dir=/usr/local/src/nginx-1.4.1 --extra-configure-flags="--with-http_gzip_static_module"
+tar xvfz nginx-{{ nginx_version }}.tar.gz
+{{ ruby_location }}/bin/passenger-install-nginx-module --auto --prefix="{{ nginx_location }}" --nginx-source-dir="/usr/local/src/nginx-{{ nginx_version }}" --extra-configure-flags="{{ nginx_extra_configure_flags }}"

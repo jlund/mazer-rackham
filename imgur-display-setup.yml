@@ -11,6 +11,6 @@
     - common
     - deploy-user
     - ssh
-    - ruby-falcon
+    - ruby-2.0.0
     - nginx-passenger
     - app-imgur-display
