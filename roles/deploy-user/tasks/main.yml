@@ -5,11 +5,6 @@
         shell=/bin/bash
         comment="Deploy User"
 
-- name: Enable sudo access for the deploy user
-  user: name=deploy
-        groups=sudo
-        append=yes
-
 - name: Set up authorized_keys for the deploy user
   authorized_key: user=deploy
                   state=present

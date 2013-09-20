@@ -1,0 +1,5 @@
+---
+ruby_library_version:   "1.9.1"
+ruby_version:           "ruby-1.9.3-p448"
+ruby_checksum:          "a7372230357bfff8e4525fb8019046da521561fe66b02c25d8efc10c9877bc91"
+ruby_download_location: "http://cache.ruby-lang.org/pub/ruby/1.9/{{ ruby_version }}.tar.bz2"

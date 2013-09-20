@@ -9,6 +9,7 @@ events {
 http {
     passenger_root {{ ruby_location }}/lib/ruby/gems/{{ ruby_library_version }}/gems/passenger-{{ passenger_version }};
     passenger_ruby /usr/local/bin/ruby-gc-wrapper;
+
     passenger_max_pool_size {{ passenger_max_pool_size }};
     passenger_max_requests {{ passenger_max_requests }};
 

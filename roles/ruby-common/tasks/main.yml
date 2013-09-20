@@ -1,14 +1,10 @@
 ---
 - name: Install Ruby dependencies
   apt: pkg={{ item }} state=present
-  with_items:
-    - libreadline-dev
-    - libssl-dev
-    - libyaml-dev
-    - zlib1g-dev
+  with_items: ruby_dependencies
 
 - name: Download the Ruby source code
-  get_url: url=http://ftp.ruby-lang.org/pub/ruby/2.0/ruby-{{ ruby_version }}.tar.bz2
+  get_url: url={{ ruby_download_location }}
            dest=/usr/local/src/
            sha256sum={{ ruby_checksum }}
 
@@ -41,12 +37,4 @@
   file: path=/usr/local/bin/{{ item }}
         src={{ ruby_location }}/bin/{{ item }}
         state=link
-  with_items:
-    - bundle
-    - erb
-    - gem
-    - irb
-    - rake
-    - rdoc
-    - ri
-    - ruby
+  with_items: ruby_symlinks

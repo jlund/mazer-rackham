@@ -1,7 +1,7 @@
 mazer-rackham
 =============
 
- Sample [Ansible](http://www.ansibleworks.com/) Playbook for Rack applications that installs Nginx, Passenger, and Ruby 2.0.0. It also demonstrates how to deploy a [basic Rack application](https://github.com/jlund/imgur-display) from a git repository.
+ Sample [Ansible](http://www.ansibleworks.com/) Playbook for Rack applications that installs Nginx, Passenger, and Ruby 2.0.0 (or 1.9.3). It also demonstrates how to deploy a [basic Rack application](https://github.com/jlund/imgur-display) from a git repository.
 
  Specifically, it does the following:
 
@@ -10,7 +10,7 @@ mazer-rackham
  * Creates a deploy user that the application files will belong to
  * Adds an SSH public key to the deploy user's Authorized Keys file
  * Reconfigures OpenSSH to only allow access via SSH keys
- * Installs Ruby 2.0.0
+ * Installs Ruby 2.0.0 (or 1.9.3)
  * Installs Bundler
  * Installs Nginx + Passenger
  * Sets up and enables an Nginx vhost
@@ -28,7 +28,8 @@ Enjoy!
 Testing this playbook with Vagrant
 ----------------------------------
 
-* Install Ansible (this playbook requires version >1.2, which for now means you need the development version) 
+* Install Ansible
+  * This playbook frequently uses new Ansible features, so installing the development version is recommended
 * Download and install [Vagrant](http://vagrantup.com/)
 * Copy or rename `Vagrantfile.example` to `Vagrantfile`
 * Copy or rename `ansible_hosts.example` to `ansible_hosts`

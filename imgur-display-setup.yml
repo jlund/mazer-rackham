@@ -11,6 +11,7 @@
     - common
     - deploy-user
     - ssh
+#   - ruby-1.9.3
     - ruby-2.0.0
     - nginx-passenger
     - app-imgur-display
