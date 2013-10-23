@@ -29,7 +29,9 @@ Testing this playbook with Vagrant
 ----------------------------------
 
 * Install Ansible
-  * This playbook frequently uses new Ansible features, so installing the development version is recommended
+  * This playbook frequently uses new Ansible features, so installing the development version is recommended. The two commands below will get you up and running quickly; run them from the directory of your choice (e.g. ~/github).
+  * `git clone git@github.com:ansible/ansible.git`
+  * `source ansible/hacking/env-setup`
 * Download and install [Vagrant](http://vagrantup.com/)
 * Copy or rename `Vagrantfile.example` to `Vagrantfile`
 * Copy or rename `ansible_hosts.example` to `ansible_hosts`
