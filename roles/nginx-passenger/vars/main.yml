@@ -1,8 +1,8 @@
 ---
-nginx_checksum: "ae123885c923a6c3f5bab0a8b7296ef21c4fdf6087834667ebbc16338177de84"
+nginx_checksum: "7c989a58e5408c9593da0bebcd0e4ffc3d892d1316ba5042ddb0be5b0b4102b9"
 nginx_extra_configure_flags: "--with-http_gzip_static_module"
-nginx_version: "1.4.3"
+nginx_version: "1.4.4"
 
-passenger_version: "4.0.20"
+passenger_version: "4.0.25"
 
 nginx_location: "/opt/nginx-{{ nginx_version }}-passenger-{{ passenger_version }}"
